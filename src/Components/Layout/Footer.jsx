@@ -1,1 +1,0 @@
-//just comment text for skipping empty folder
