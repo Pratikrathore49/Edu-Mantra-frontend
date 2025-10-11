@@ -1,25 +1,20 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router";
 import "./App.css";
-
-
-
-import MainLayout from "./components/mainLayout/MainLayout";
-
-import Header from "./components/mainLayout/Header";
-import LoginForm from "./pages/LoginForm";
-import SignupForm from "./pages/SignupForm";
+import LoginForm from "./pages/auth/LoginForm";
+import SignupForm from "./pages/auth/SignupForm";
+import MainLayout from "./components/layouts/mainLayout/MainLayout";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   return (
-  <Routes>
-       <Route  path='login' element={<LoginForm/>} />
-      <Route  path='signup' element={<SignupForm/>}/>
-    <Route>
-      <Route path='/' element={<MainLayout/>}/>
-      <Route index element={<Header/>}/>
+    <Routes>
+      <Route path="/login" element={<LoginForm />} />
+      <Route path="/signup" element={<SignupForm />} />
 
-    </Route>
-  </Routes>
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<LandingPage />} />
+      </Route>
+    </Routes>
   );
 }
 
