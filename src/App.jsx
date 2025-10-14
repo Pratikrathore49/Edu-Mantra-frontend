@@ -4,17 +4,27 @@ import LoginForm from "./pages/auth/LoginForm";
 import SignupForm from "./pages/auth/SignupForm";
 import MainLayout from "./components/layouts/mainLayout/MainLayout";
 import LandingPage from "./pages/LandingPage";
+import { useSelector } from "react-redux";
+import PopupLayout from "./popup/PopupLayout";
+import Loader from "./components/ui/Loader";
 
 function App() {
-  return (
-    <Routes>
-      <Route path="/login" element={<LoginForm />} />
-      <Route path="/signup" element={<SignupForm />} />
+  const isOpen = useSelector((state) => state.model.isOpen);
 
-      <Route path="/" element={<MainLayout />}>
-        <Route index element={<LandingPage />} />
-      </Route>
-    </Routes>
+  return (
+    <>
+      <Routes>
+        <Route path="/loader" element={<Loader />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/signup" element={<SignupForm />} />
+
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<LandingPage />} />
+        </Route>
+      </Routes>
+     
+      {isOpen && <PopupLayout />}
+    </>
   );
 }
 
