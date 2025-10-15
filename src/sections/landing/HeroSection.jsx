@@ -3,8 +3,8 @@ import boyimg from "../../assets/images/boy-cross-fingers.png";
 
 const HeroSection = () => {
   return (
-    <section className="   w-full">
-      <div className=" flex flex-col md:flex-row gap-2 items-center   ">
+    <section className="  w-full flex justify-center ">
+      <div className=" flex flex-col md:flex-row gap-24 items-center   ">
         <div className="flex-1 flex flex-col  self-center space-y-8 items-baseline">
           <p className="capitalize text-orange-500 py-1 px-2 bg-white w-fit">
             never stop learing
@@ -13,7 +13,7 @@ const HeroSection = () => {
           ">
             Grow up your skills by learning with Edu-Mantra
           </h1>
-          <p className=" text-sm text-gray-500">
+          <p className=" text-lg  text-gray-500">
             Student Portal – your one-stop learning hub. Access notes,
             resources, and personal details seamlessly, while teachers share
             materials and guide students for smarter education.

@@ -13,6 +13,7 @@ import {
   FaLinkedin,
   FaTwitter,
 } from "react-icons/fa";
+import Button from "../../ui/Button";
 
 const Footer = () => {
   return (
@@ -43,12 +44,9 @@ const Footer = () => {
               EduMantra.
             </p>
             <div className="flex gap-8 mt-6 ">
-              <button className="bg-purple-700  text-white px-4 py-2 rounded">
-                Learn More
-              </button>
-              <button className="bg-purple-700 text-white px-4 py-2 rounded">
-                Get Started
-              </button>
+              <Button text="Learn More" className=" px-4 py-2 rounded" />
+
+              <Button text="Get Started" className=" px-4 py-2 rounded" />
             </div>
           </div>
         </div>
