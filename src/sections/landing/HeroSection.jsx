@@ -3,7 +3,7 @@ import boyimg from "../../assets/images/boy-cross-fingers.png";
 
 const HeroSection = () => {
   return (
-    <section className="mt-12   w-full">
+    <section className="   w-full">
       <div className=" flex flex-col md:flex-row gap-2 items-center   ">
         <div className="flex-1 flex flex-col  self-center space-y-8 items-baseline">
           <p className="capitalize text-orange-500 py-1 px-2 bg-white w-fit">
@@ -21,9 +21,9 @@ const HeroSection = () => {
 
         </div>
 
-        <div className=" flex-1 justify-center flex md:flex-end ">
-          <div className="bg-red-300 w-2/3  rounded-full   overflow-hidden">
-            <img className=" w-full object-co" src={boyimg} alt="boy_img" />
+        <div className=" flex-1 justify-center flex md:flex-end ml-12 mt-20 ">
+          <div className="bg-red-300 w-3/5  rounded-full   overflow-hidden">
+            <img className=" w-full  " src={boyimg} alt="boy_img" />
           </div>
         </div>
       </div>

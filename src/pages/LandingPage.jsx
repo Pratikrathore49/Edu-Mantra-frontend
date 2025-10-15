@@ -5,6 +5,7 @@ const LandingPage = () => {
   return (
     <div className='w-full h-full bg-purple-5 '>
         <HeroSection/>
+        
       
     </div>
   )

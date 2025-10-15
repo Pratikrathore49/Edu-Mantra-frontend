@@ -8,7 +8,7 @@ const MainLayout = () => {
     <>
     <div className='bg-[#f6eff7]'>
     <Header/>
-    <main className='px-20 '>
+    <main className='px-28 '>
     <Outlet/>
     </main>
     <Footer/>

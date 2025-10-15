@@ -5,7 +5,7 @@ import { ChevronDown, Menu } from 'lucide-react'
 
 const Header = () => {
   return (
-   <section className='flex justify-between w-full py-3 items-center font-medium text-gray-700  text-sm px-20'>
+   <section className='flex justify-between w-full py-3 items-center font-medium text-gray-700   px-28'>
     <div className='flex gap-2'>
         <div><img className='w-10/12' src={img} alt="" /></div>
        
@@ -19,7 +19,7 @@ const Header = () => {
         <div className='flex items-center gap-1 cursor-pointer hover:text-purple-800 hover:font-semibold '> <p>Papers</p> <ChevronDown size={16} strokeWidth={2.6} /></div>
         <div className='flex items-center gap-1 cursor-pointer  hover:text-purple-800 hover:font-semibold'><p>Courses</p><ChevronDown size={16} strokeWidth={2.6} /> </div>
         <div className='flex items-center gap-1 cursor-pointer  hover:text-purple-800 hover:font-semibold'><p>About Us</p> <ChevronDown size={16} strokeWidth={2.6} /> </div>
-        <div className='flex items-center gap-1 cursor-pointer  hover:text-purple-800 hover:font-semibold'><p>Contact Us</p><ChevronDown size={16} strokeWidth={2.6} /> </div>
+        <div className='flex items-center gap-1 cursor-pointer text-base hover:text-purple-800 hover:font-semibold'><p>Contact Us</p><ChevronDown size={16} strokeWidth={2.6} /> </div>
     </div>
       
       <div className='flex  gap-4  items-center text-purple-800'>
