@@ -9,7 +9,9 @@ import PopupLayout from "./popup/PopupLayout";
 import Loader from "./components/ui/Loader";
 import TeacherLayout from "./components/layouts/teacherLayout/TeacherLayout";
 import AddQuestion from "./sections/teacher/AddQuestion";
-import Paper from "./sections/teacher/Paper";
+import Papers from "./sections/teacher/Papers";
+import Questions from "./sections/teacher/Questions";
+import AddPaper from "./sections/teacher/AddPaper";
 
 function App() {
   const isOpen = useSelector((state) => state.model.isOpen);
@@ -28,7 +30,9 @@ function App() {
         <Route path='/teacher' element={<TeacherLayout/>}>
            <Route index element={<h1>ram ram </h1>}/>
            <Route path='addQuestion' element={<AddQuestion/>}/>
-           <Route path='paper' element={<Paper/>}/>
+           <Route path='papers' element={<Papers/>}/>
+            <Route path='questions' element={<Questions/>}/>
+            <Route path="addPaper" element={<AddPaper/>}  />
           </Route>
       </Routes>
      
