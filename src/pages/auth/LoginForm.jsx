@@ -9,20 +9,17 @@ import { setSelectedModel } from "../../redux/model/modelSlice";
 import Loader from "../../components/ui/Loader";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRef } from "react";
+import { Link, useNavigate } from "react-router";
+import { Navigate } from "react-router";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isTeacher, setIsTeacher] = useState(false);
   const { loading } = useSelector((state) => state.auth);
   const recaptchaRef = useRef(null);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const { register, handleSubmit,formState: { errors },reset,} = useForm();
   const dispatch = useDispatch();
-
+  const navigate = useNavigate()
   const handleLogin = async (formData) => {
     try {
       const token = recaptchaRef.current.getValue();
@@ -43,6 +40,8 @@ const LoginForm = () => {
       );
       recaptchaRef.current.reset();
       reset();
+       navigate('/student')
+    
     } catch (error) {
       dispatch(
         setSelectedModel({
@@ -178,12 +177,12 @@ const LoginForm = () => {
 
             <p className="text-sm text-center mt-4">
               Don't have an account?{" "}
-              <a
-                href="/signup"
+              <Link
+                to={"/signup"}
                 className="text-purple-800 font-semibold hover:underline"
               >
                 Sign Up
-              </a>
+              </Link>
             </p>
           </form>
         </div>

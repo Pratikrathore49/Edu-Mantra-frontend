@@ -1,9 +1,11 @@
-
-const PaperView = ({ data, questionsList, selectedQuestions }) => {
+const PaperViewStructure = ({ data, questionsList, selectedQuestions }) => {
   const selected = questionsList.filter((q) =>
     (selectedQuestions || []).includes(q._id)
   );
+ console.log('questionsList',questionsList)
+ console.log('selectedQuestions',selectedQuestions)
 
+ console.log('selected',selected)
   return (
     <div className="bg-white shadow-lg rounded-xl border border-gray-200 p-8 max-w-4xl mx-auto">
       {/* Header */}
@@ -126,4 +128,4 @@ const PaperView = ({ data, questionsList, selectedQuestions }) => {
   );
 };
 
-export default PaperView;
+export default PaperViewStructure;

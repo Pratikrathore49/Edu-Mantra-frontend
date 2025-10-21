@@ -3,7 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { addPaperAsync } from "../../redux/paper/paperSlice";
 import { fetchQuestionsAsync } from "../../redux/question/questionSlice";
-import PaperView from "./PaperView";
+import PaperViewStructure from "./PaperViewStructure";
 import { FaImage } from "react-icons/fa";
 import { setSelectedModel } from "../../redux/model/modelSlice";
 
@@ -294,7 +294,7 @@ const AddPaper = () => {
         <div className=" w-2  border-none bg-gradient-to-b  from-purple-200 via-purple-800 to-purple-2 "></div>
 
         <div className=" flex-1 px-2  ">
-          <PaperView
+          <PaperViewStructure
             data={watchAllFields}
             questionsList={questionsList}
             selectedQuestions={selectedQuestions}

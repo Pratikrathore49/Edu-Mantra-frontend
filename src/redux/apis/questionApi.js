@@ -17,10 +17,12 @@ export const addQuestionApi = async (data) => {
     return res.data.data;
   } catch (error) {
     throw {
-      message: error.response?.data?.message || error.message,
+      message: error.response?.data?.message || error.message|| 'Adding Question Failed',
+      status:error.response?.status || 500
     };
   }
 };
+
 
 export const fetchQuestionsApi= async ({ skip, limit }) => {
   try {
@@ -30,6 +32,36 @@ export const fetchQuestionsApi= async ({ skip, limit }) => {
     );
     return res.data.data;
   } catch (error) {
-    console.log(error.message);
+    throw{
+    message :error.response?.data?.message || error.message || 'Fetching Question Failed',
+    status:error.response?.status || 500
+    }
   }
 };
+
+export const deleteQuestionApi = async(id)=>{
+  try{
+     const res = await axiosInstance.delete(`v3/question/delete/${id}`)
+    return  res.data
+  }catch (error) {
+    throw{
+    message :error.response?.data?.message || error.message || 'Fetching Question Failed',
+    status:error.response?.status || 500
+    }
+  }
+}
+
+
+export const updateQuestionApi = async(data)=>{
+  try{
+    const res = await axiosInstance.patch(`v3/question/update/${data._id}`,data)
+    return res.data
+  }catch (error) {
+    throw{
+    message :error.response?.data?.message || error.message || 'Fetching Question Failed',
+    status:error.response?.status || 500
+    }
+  }
+}
+
+

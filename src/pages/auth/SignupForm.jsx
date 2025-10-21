@@ -57,7 +57,7 @@ const SignupForm = () => {
 
   return (
     <>
-      {" "}
+    
       {loading && <Loader />}
       <section className="flex min-h-screen w-full bg-[#f6eff7] justify-center items-center px-4 py-6">
         <div className="bg-white shadow-xl rounded-2xl w-full sm:w-[90%] md:w-3/4 lg:w-[55%] p-8 sm:p-10 space-y-6 transition-all duration-300 relative">

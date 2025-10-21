@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllPapersAsync } from "../../redux/paper/paperSlice";
 import { BookOpen, Clock, FileText, Award } from "lucide-react"; // icons
 import { Link } from "react-router";
-import PaperView from "./PaperView";
+import PaperViewStructure from "./PaperViewStructure";
 
 const Papers = () => {
-  const [isView,setIsView] = useState(false)
+  const [isView,setIsView] = useState({})
   const dispatch = useDispatch();
   const papersList = useSelector((state) => state.paper.allPapers || []);
 
@@ -18,8 +18,9 @@ const Papers = () => {
 
 
   return (<>
-      <section className="p-8 min-h-screen ">
-      <h1 className="text-3xl font-bold text-purple-800 mb-8 text-center">
+      <section className=" min-h-screen flex">
+     <div className="flex-1 p-8 ">
+      <h1 className="text-3xl font-bold text-purple-800 mb-8  text-center">
         All Papers
       </h1>
 
@@ -85,19 +86,24 @@ const Papers = () => {
 
             {/* Footer */}
             <div className="p-4 bg-purple-50 flex justify-center">
-              <button
+           <Link to={`viewPaper/${paper._id}`} >    <button
                 // onClick={() => handleViewPaper(paper)}
-                onClick={()=>setIsView(true)}
+                // onClick={()=>setIsView({open:true,data:paper})}
+
                 className="px-4 py-2 text-sm font-medium bg-purple-600 text-white rounded-lg w-full hover:bg-purple-700 transition-all"
               >
                 View Paper
-              </button>
+              </button></Link>
+
             </div>
           </div>
         ))}
       </div>
+      </div>
+
+             {/* { isView.open &&  <div className="flex-1"><PaperView data={isView.data}  selected={isView.data.question}/></div>} */}
     </section>
-    { isView && <PaperView />}
+    
     </>
 
   );

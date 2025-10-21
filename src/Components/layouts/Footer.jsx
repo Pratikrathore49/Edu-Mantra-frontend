@@ -1,19 +1,19 @@
 import React from "react";
 
-import student1 from "../../../assets/images/footer/student1.jpeg";
-import student2 from "../../../assets/images/footer/student2.jpeg";
-import student3 from "../../../assets/images/footer/student3.jpeg";
-import student4 from "../../../assets/images/footer/student4.jpeg";
-import student5 from "../../../assets/images/footer/student5.jpg";
-import student6 from "../../../assets/images/footer/student6.jpeg";
-import logo from "../../../assets/codeMantra.png";
+import student1 from "../../assets/images/footer/student1.jpeg";
+import student2 from "../../assets/images/footer/student2.jpeg";
+import student3 from "../../assets/images/footer/student3.jpeg";
+import student4 from "../../assets/images/footer/student4.jpeg";
+import student5 from "../../assets/images/footer/student5.jpg";
+import student6 from "../../assets/images/footer/student6.jpeg";
+import logo from "../../assets/codeMantra.png";
 import {
   FaFacebookF,
   FaInstagram,
   FaLinkedin,
   FaTwitter,
 } from "react-icons/fa";
-import Button from "../../ui/Button";
+import Button from ".././ui/Button";
 
 const Footer = () => {
   return (
