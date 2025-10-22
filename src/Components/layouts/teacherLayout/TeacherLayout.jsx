@@ -2,6 +2,8 @@ import Aside from '../../../sections/teacher/Aside'
 import { Outlet } from 'react-router'
 
 const TeacherLayout = () => {
+ 
+
   return (
     <div className='flex'>
           

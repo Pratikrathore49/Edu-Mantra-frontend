@@ -1,12 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { checkUserApi, registerStudentApi, registerTeacherApi, studentLoginApi,  teacherLoginApi,} from "../apis/authapi";
+import {
+  checkUserApi,
+  logoutUserApi,
+  registerStudentApi,
+  registerTeacherApi,
+  studentLoginApi,
+  teacherLoginApi,
+} from "../apis/authapi";
 
 const initialState = {
-    user: null,
-    loading: false,
-    error: null,
-  }
-
+  user: null,
+  loading: true,
+  error: null,
+};
 
 export const studentLogin = createAsyncThunk(
   "auth/studentLogin",
@@ -58,21 +64,33 @@ export const registerTeacher = createAsyncThunk(
   }
 );
 
- 
-export const checkUserAsync = createAsyncThunk('auth/checkUser',async(_,{rejectWithValue})=>{
-  try{
-       const res = await checkUserApi()
-       return res.data
-  }catch(error){
-    return rejectWithValue(error.message)
+export const logoutUserAsync = createAsyncThunk(
+  "auth/logout",
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await logoutUserApi();
+      res.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
-})
+);
 
-
+export const checkUserAsync = createAsyncThunk(
+  "auth/checkUser",
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await checkUserApi();
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 export const authSlice = createSlice({
   name: "auth",
- initialState,
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -132,6 +150,36 @@ export const authSlice = createSlice({
         state.user = null;
         state.error = action.payload;
       })
+
+      .addCase(checkUserAsync.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(checkUserAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.user = action.payload;
+      })
+      .addCase(checkUserAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.user = null;
+        state.error = action.payload;
+      })
+
+      .addCase(logoutUserAsync.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(logoutUserAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.user = action.payload;
+      })
+      .addCase(logoutUserAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.user = null;
+        state.error = action.payload;
+      });
   },
 });
 

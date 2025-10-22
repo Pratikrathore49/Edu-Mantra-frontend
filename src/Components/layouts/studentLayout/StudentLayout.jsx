@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Header";
-import { Outlet } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 import Footer from "../Footer";
+import { useSelector } from "react-redux";
 
 const StudentLayout = () => {
+  const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (user.role === "teacher") {
+      navigate("/teacher");
+    }
+  }, [user,navigate]);
   return (
     <>
       <div className="bg-[#f6eff7]">

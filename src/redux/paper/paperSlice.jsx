@@ -1,10 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { addPaperApi, fetchAllPapersApi } from "../apis/paperApi";
+import {
+  addPaperApi,
+  fetchAllPapersApi,
+  fetchPaperByIdApi,
+} from "../apis/paperApi";
 
 const initialState = {
   allPapers: [],
+  onePaper:null,
   error: null,
-  loading: false,
+  loading: true,
 };
 
 export const addPaperAsync = createAsyncThunk(
@@ -30,6 +35,19 @@ export const fetchAllPapersAsync = createAsyncThunk(
     }
   }
 );
+
+export const fetchPaperByIdAsync = createAsyncThunk(
+  "paper/fetchPaperById",
+  async (id, thunkApi) => {
+    try {
+      const res = await fetchPaperByIdApi(id);
+      return res.data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
 const paperSlice = createSlice({
   name: "paper",
   initialState,
@@ -49,23 +67,35 @@ const paperSlice = createSlice({
       .addCase(addPaperAsync.fulfilled, (state, action) => {
         state.allPapers.push(action.payload);
         state.error = null;
-        state.loading = true;
+        state.loading = false;
       })
 
       .addCase(fetchAllPapersAsync.pending, (state, action) => {
-        state.allPapers = [];
         state.error = null;
         state.loading = true;
       })
       .addCase(fetchAllPapersAsync.rejected, (state, action) => {
-        state.allPapers = [];
         state.error = action.payload;
         state.loading = false;
       })
       .addCase(fetchAllPapersAsync.fulfilled, (state, action) => {
         state.allPapers = action.payload;
         state.error = null;
+        state.loading = false;
+      })
+
+      .addCase(fetchPaperByIdAsync.pending, (state, action) => {
+        state.error = null;
         state.loading = true;
+      })
+      .addCase(fetchPaperByIdAsync.rejected, (state, action) => {
+        state.error = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchPaperByIdAsync.fulfilled, (state, action) => {
+        state.onePaper = action.payload;
+        state.error = null;
+        state.loading = false;
       });
   },
 });

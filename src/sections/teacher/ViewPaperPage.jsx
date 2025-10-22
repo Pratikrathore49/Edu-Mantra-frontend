@@ -2,29 +2,24 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import axiosInstance from "../../services/axiosInstance";
 import PaperViewStructure from "./PaperViewStructure";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPaperByIdAsync } from "../../redux/paper/paperSlice";
 
 const ViewPaperPage = () => {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const navigate = useNavigate();
-  const [paperData, setPaperData] = useState(null);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    const fetchPaper = async () => {
-      try {
-        const res = await axiosInstance.get(`v2/paper/${id}`);
-        console.log("res", res.data.data);
-        setPaperData(res.data.data);
-      } catch (error) {
-        console.log("Failed to load paper:", error);
-      }
-    };
-    fetchPaper();
-  }, [id]);
+  const { onePaper } = useSelector((state) => state.paper);
 
-  if (!paperData)
-    return (
-      <p className="text-center mt-10 text-gray-500">Loading paper....</p>
-    );
+
+   useEffect(() => {
+    dispatch(fetchPaperByIdAsync(id));
+  }, [dispatch]);
+
+
+  if (!onePaper)
+    return <p className="text-center mt-10 text-gray-500">Loading paper....</p>;
 
   return (
     <div className="p-6">
@@ -37,9 +32,9 @@ const ViewPaperPage = () => {
       </button>
 
       <PaperViewStructure
-        data={paperData}
-        questionsList={paperData.question} 
-        selectedQuestions={paperData.question?.map((q) => q._id)} // all question IDs
+        data={onePaper}
+        questionsList={onePaper.question}
+        selectedQuestions={onePaper.question?.map((q) => q._id)} // all question IDs
       />
     </div>
   );

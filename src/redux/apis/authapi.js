@@ -62,6 +62,19 @@ export const registerTeacherApi = async (teacherData) => {
   }
 };
 
+export const logoutUserApi = async()=>{
+  try{
+    const res = await axiosInstance.get('v2/auth/logout')
+    return res.data
+
+  }catch(error){
+    throw{
+      message:error.response?.data?.message || error.message || "Logout failed",
+      status: error.response?.status || 500
+    }
+  }
+}
+
 export const checkUserApi = async () => {
   try {
     const response = await axiosInstance.get("me");

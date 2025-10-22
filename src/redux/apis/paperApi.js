@@ -14,6 +14,17 @@ const addPaperApi =async(data)=>{
     }
 } 
 
+ const fetchPaperByIdApi = async(id)=>{
+   try{
+           const res = await axiosInstance.get(`v2/paper/${id}`);
+          return res.data
+   }catch(error){
+     throw{
+      message:error.response?.data?.message || error.message ||'Paper Fetching Failed ',
+      status:error.response?.status || 500
+     }
+   }
+ }
 
 const fetchAllPapersApi = async()=>{
    try{
@@ -27,4 +38,4 @@ const fetchAllPapersApi = async()=>{
    }
 }
 
-export{addPaperApi,fetchAllPapersApi}
+export{addPaperApi,fetchAllPapersApi,fetchPaperByIdApi}

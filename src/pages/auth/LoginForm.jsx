@@ -1,6 +1,6 @@
 import student from "../../assets/images/signup.png";
 import logo from "../../assets/codeMantra.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { studentLogin, teacherLogin } from "../../redux/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Eye, EyeOff } from "lucide-react";
@@ -10,16 +10,29 @@ import Loader from "../../components/ui/Loader";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRef } from "react";
 import { Link, useNavigate } from "react-router";
-import { Navigate } from "react-router";
+
 
 const LoginForm = () => {
+
   const [showPassword, setShowPassword] = useState(false);
   const [isTeacher, setIsTeacher] = useState(false);
-  const { loading } = useSelector((state) => state.auth);
+  const { loading ,user} = useSelector((state) => state.auth);
   const recaptchaRef = useRef(null);
   const { register, handleSubmit,formState: { errors },reset,} = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate()
+
+  useEffect(()=>{
+    if(user?.role === 'student'){
+   navigate('/student')
+    }
+    else if(user?.role === 'teacher'){
+   navigate('/teacher')
+    }
+    
+  },[user,navigate]);
+
+
   const handleLogin = async (formData) => {
     try {
       const token = recaptchaRef.current.getValue();

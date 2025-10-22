@@ -26,9 +26,7 @@ const Papers = () => {
 
       <div className="grid grid-cols-[repeat(auto-fit,minmax(230px,1fr))] gap-8">
         {/* + Add Paper Card */}
-       <Link to={'/teacher/addPaper'}> <div  
-          className="h-[250px] flex flex-col justify-center items-center bg-white border-2 border-dashed border-purple-400 text-purple-600 text-6xl font-bold rounded-2xl cursor-pointer hover:bg-purple-100 hover:scale-105 transition-transform duration-300 shadow-sm"
-        >
+       <Link to={'/teacher/addPaper'}> <div  className="h-[250px] flex flex-col justify-center items-center bg-white border-2 border-dashed border-purple-400 text-purple-600 text-6xl font-bold rounded-2xl cursor-pointer hover:bg-purple-100 hover:scale-105 transition-transform duration-300 shadow-sm" >
           +
           <p className="text-base mt-3 font-semibold text-purple-700">
             Add Paper
