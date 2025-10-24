@@ -73,9 +73,8 @@ const Header = () => {
         </div>
 
         {navItems.map((item) => (
-          <Link to={item.path}>
-            {" "}
-            <div className="flex items-center gap-1 cursor-pointer hover:text-purple-800 hover:font-semibold ">
+          <Link key={item.name} to={item.path}>
+            <div  className="flex items-center gap-1 cursor-pointer hover:text-purple-800 hover:font-semibold ">
               <p>{item.name}</p> {item.icon}
             </div>
           </Link>

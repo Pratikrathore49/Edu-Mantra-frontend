@@ -128,7 +128,6 @@ export const authSlice = createSlice({
       })
       .addCase(teacherLogin.fulfilled, (state, action) => {
         state.loading = false;
-        state.error = null;
         state.user = action.payload;
       })
       .addCase(teacherLogin.rejected, (state, action) => {

@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   allPapers: [],
-  onePaper:null,
+  onePaper: null,
   error: null,
   loading: true,
 };
