@@ -8,6 +8,7 @@ import {
   submitResultAsync,
 } from "../../redux/result/resultSlice";
 import { useParams } from "react-router";
+import { quesExplainationAsync } from "../../redux/ai/aiSlice";
 
 const StudentTest = () => {
   const { id } = useParams();
@@ -23,7 +24,12 @@ const StudentTest = () => {
   const [answers, setAnswers] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [result, setResult] = useState(null);
-    const questions = useMemo(() => onePaper?.question || [],[onePaper]);
+  const questions = useMemo(() => onePaper?.question || [], [onePaper]);
+  const { AllExplanations: explanations, loading: loadingQues } = useSelector(
+    (state) => state.ai || {}
+  );
+
+
 
   useEffect(() => {
     if (!authUser?._id) return;
@@ -50,7 +56,13 @@ const StudentTest = () => {
     );
   }
 
-
+  const handleAiExplain = async (ques) => {
+    try {
+      dispatch(quesExplainationAsync(ques));
+    } catch (error) {
+      console.error("AI Error:", error);
+    }
+  };
 
   // compute score locally
   const calculateResult = () => {
@@ -127,7 +139,7 @@ const StudentTest = () => {
               <p className="font-medium">
                 <span className="font-semibold text-gray-800">
                   Total Marks:
-                </span>{" "}
+                </span>
                 {result.paper.totalMarks}
               </p>
             </div>
@@ -158,7 +170,7 @@ const StudentTest = () => {
                     setResult(null);
                     setAnswers({});
                     setPage(0);
-                     dispatch(clearResult());
+                    dispatch(clearResult());
                   }}
                 >
                   Retake
@@ -180,7 +192,12 @@ const StudentTest = () => {
                   <p className="text-gray-800 leading-relaxed text-base">
                     {ques.question}
                   </p>
-                  <button className="bg-purple-200 border border-purple-500 p-1 cursor-pointer rounded ">Ai Explanation</button>
+                  <button
+                    onClick={() => handleAiExplain(ques)}
+                    className="bg-purple-200 border border-purple-500 p-1 cursor-pointer rounded px-2 text-sm hover:bg-purple-300 transition"
+                  >
+                    {loadingQues === ques._id ? "Loading..." : "AI Explanation"}
+                  </button>
                 </div>
                 <ul className="space-y-2 ml-6 mt-2 text-gray-700">
                   {["option1", "option2", "option3", "option4"].map(
@@ -219,6 +236,12 @@ const StudentTest = () => {
                     )
                   )}
                 </ul>
+
+                {explanations?.[ques._id] && (
+                  <p className="my-4 text-sm text-gray-700 bg-purple-50 border border-purple-200 p-2 rounded">
+                    💡 {explanations?.[ques._id]}
+                  </p>
+                )}
               </li>
             ))}
           </ul>
