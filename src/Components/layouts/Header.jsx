@@ -10,6 +10,7 @@ import { MdLogout } from "react-icons/md";
 import { logoutUserAsync } from "../../redux/auth/authSlice";
 import { setSelectedModel } from "../../redux/model/modelSlice";
 
+
 const Header = () => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -82,17 +83,17 @@ const Header = () => {
       </div>
 
       {user ? (
-        <div className="flex items-center text-2xl text-purple-800  gap-2">
-          <span onClick={logoutFun} className="cursor-pointer">
+     <Link to={'profile'}> <div  className="flex items-center text-2xl text-purple-800  gap-2">
+          {/* <span onClick={logoutFun} className="cursor-pointer">
             <MdLogout />
-            {/* <IoSettingsOutline />//for setting */}
-          </span>
+            {/* <IoSettingsOutline />//for setting }
+          </span> */}
           <div className="w-9 h-9 flex justify-center items-center border-purple-800 border-2 rounded-full bg-purple-800  cursor-pointer font-semibold capitalize text-white">
             <p className="text-2xl px-1 pt-1 ">
               {user?.first_name?.slice(0, 1)}
             </p>
           </div>
-        </div>
+        </div></Link>  
       ) : (
         <div className="flex  gap-4  items-center text-purple-800">
           <Link to={"/signup"}>
@@ -106,9 +107,9 @@ const Header = () => {
               Login
             </button>
           </Link>
-          {/* <button></button> */}
+        
           <button className="md:hidden block">
-            {" "}
+         
             <Menu />
           </button>
         </div>

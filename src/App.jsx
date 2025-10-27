@@ -20,6 +20,7 @@ import StudentLayout from "./components/layouts/studentLayout/StudentLayout";
 import TeacherProtected from "./protected/TeacherProtected";
 import PaperPageHeader from "./pages/PaperPageHeader";
 import StudentTest from "./sections/paper/StudentTest";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   const isOpen = useSelector((state) => state.model.isOpen);
@@ -43,11 +44,9 @@ function App() {
           path="/student" element={<LoginProtected> <StudentLayout /></LoginProtected>}>
           <Route index element={<h1>pratik </h1>} />
           <Route path="papers" element={<PaperPageHeader/>}/>
-          <Route path="papers/test/:id" element={<StudentTest/>}   />
+          <Route path="papers/test/:id" element={<StudentTest/>} />
+        <Route path="profile" element={<ProfilePage/>}/>
         </Route>
-
-
-
 
 
         <Route

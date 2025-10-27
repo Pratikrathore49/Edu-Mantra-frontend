@@ -5,6 +5,7 @@ import quesReducer from '../redux/question/questionSlice';
 import paperReducer from '../redux/paper/paperSlice';
 import resultReducer from '../redux/result/resultSlice';
 import aiReducer from '../redux/ai/aiSlice'
+import userReducer from '../redux/user/userSlice';
 
         
 
@@ -16,5 +17,6 @@ export const store = configureStore({
     paper:paperReducer,
     result:resultReducer,
     ai:aiReducer,
+    user:userReducer,
   },
 });

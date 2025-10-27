@@ -11,7 +11,6 @@ export const modelSlice = createSlice({
   reducers: {
     setSelectedModel: (state, action) => {
         state.isOpen=true;
-      
       state.selectedModel = action.payload;
     },
     handleCloseModlePopup: (state) => {

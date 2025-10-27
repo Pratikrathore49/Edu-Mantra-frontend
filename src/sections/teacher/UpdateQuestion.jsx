@@ -45,7 +45,7 @@ const UpdateQuestion = ({ setIsQuestionEdit, isQuestionEdit }) => {
         className="bg-white shadow-xl px-6 border border-gray-200 rounded-xl space-y-4 py-6 w-full max-w-4xl"
       >
         <h2 className="text-2xl font-semibold text-center text-gray-800 mb-2">
-          Add Question
+          Update Question
         </h2>
 
         <div className="flex flex-col md:flex-row w-full gap-4">
