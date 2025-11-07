@@ -1,26 +1,44 @@
-import { Route, Routes } from "react-router";
 import "./App.css";
-import LoginForm from "./pages/auth/LoginForm";
-import SignupForm from "./pages/auth/SignupForm";
-import LandingLayout from "./components/layouts/LandingLayout/LandingLayout";
-import LandingPage from "./pages/LandingPage";
-import { useDispatch, useSelector } from "react-redux";
+import {lazy,Suspense,useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Route, Routes } from 'react-router';
+import { checkUserAsync } from './redux/auth/authSlice';
+ import LoginProtected from "./protected/LoginProtected";
+ import TeacherProtected from "./protected/TeacherProtected";
+
+
+//Ui
+
 import PopupLayout from "./popup/PopupLayout";
-import Loader from "./components/ui/Loader";
-import TeacherLayout from "./components/layouts/teacherLayout/TeacherLayout";
-import AddQuestion from "./sections/teacher/AddQuestion";
-import Papers from "./sections/teacher/Papers";
-import Questions from "./sections/teacher/Questions";
-import AddPaper from "./sections/teacher/AddPaper";
-import ViewPaperPage from "./sections/teacher/ViewPaperPage";
-import { useEffect } from "react";
-import { checkUserAsync } from "./redux/auth/authSlice";
-import LoginProtected from "./protected/LoginProtected";
-import StudentLayout from "./components/layouts/studentLayout/StudentLayout";
-import TeacherProtected from "./protected/TeacherProtected";
-import PaperPageHeader from "./pages/PaperPageHeader";
-import StudentTest from "./sections/paper/StudentTest";
-import ProfilePage from "./pages/ProfilePage";
+import Loader from './components/ui/Loader'
+
+
+//Auth Pages
+const LoginForm = lazy(()=>import('./pages/auth/LoginForm'));
+const SignupForm = lazy(()=>import ("./pages/auth/SignupForm"));
+
+//Layouts 
+const LandingLayout = lazy(()=>import('./components/layouts/LandingLayout/LandingLayout'))
+const TeacherLayout = lazy(()=>import('./components/layouts/teacherLayout/TeacherLayout'))
+const StudentLayout = lazy(()=>import('./components/layouts/studentLayout/StudentLayout'))
+
+//Pages
+const LandingPage = lazy(()=>import("./pages/LandingPage"))
+const PaperPageHeader = lazy(()=>import('./pages/PaperPageHeader'))
+const ProfilePage = lazy(()=>import("./pages/ProfilePage"))
+
+// Sections(teacher & student)
+const AddQuestion = lazy(()=>import("./sections/teacher/AddQuestion"))
+const Papers = lazy(()=>import("./sections/teacher/Papers"))
+const Questions = lazy(()=>import("./sections/teacher/Questions"))
+const AddPaper = lazy(()=>import("./sections/teacher/AddPaper"))
+const ViewPaperPage =lazy(()=>import("./sections/teacher/ViewPaperPage"));
+const StudentTest = lazy(()=>import('./sections/paper/StudentTest'));
+
+
+
+
+
 
 function App() {
   const isOpen = useSelector((state) => state.model.isOpen);
@@ -31,6 +49,7 @@ function App() {
 
   return (
     <>
+    <Suspense fallback={<Loader/>}>
       <Routes>
         <Route path="/loader" element={<Loader />} />
         <Route path="/login" element={<LoginForm />} />
@@ -41,7 +60,7 @@ function App() {
 
         {/* student route started */}
         <Route
-          path="/student" element={<LoginProtected> <StudentLayout /></LoginProtected>}>
+          path="/student" element={<LoginProtected > <StudentLayout /></LoginProtected>}>
           <Route index element={<h1>pratik </h1>} />
           <Route path="papers" element={<PaperPageHeader/>}/>
           <Route path="papers/test/:id" element={<StudentTest/>} />
@@ -62,6 +81,7 @@ function App() {
       </Routes>
 
       {isOpen && <PopupLayout />}
+      </Suspense>
     </>
   );
 }

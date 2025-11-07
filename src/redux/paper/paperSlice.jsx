@@ -1,3 +1,4 @@
+
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   addPaperApi,
@@ -6,10 +7,10 @@ import {
 } from "../apis/paperApi";
 
 const initialState = {
-  allPapers: [],
+  allPapers: { papers: [], totalPages: 0 },
   onePaper: null,
   error: null,
-  loading: true,
+  loading: false,
 };
 
 export const addPaperAsync = createAsyncThunk(
@@ -25,11 +26,12 @@ export const addPaperAsync = createAsyncThunk(
 );
 
 export const fetchAllPapersAsync = createAsyncThunk(
-  "paper/fetchPaper",
-  async (_, thunkApi) => {
+  "paper/fetchAllPapers",
+  async ({ skip, limit }, thunkApi) => {
     try {
-      const res = await fetchAllPapersApi();
-      return res.data;
+      const res = await fetchAllPapersApi({ skip, limit });
+      console.log('slice',res.data)
+      return res.data; // ✅ should return { papers: [], totalPages }
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }
@@ -54,48 +56,48 @@ const paperSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(addPaperAsync.pending, (state, action) => {
-        state.allPapers = [];
-        state.error = null;
+      // ✅ Add Paper
+      .addCase(addPaperAsync.pending, (state) => {
         state.loading = true;
-      })
-      .addCase(addPaperAsync.rejected, (state, action) => {
-        state.allPapers = [];
-        state.error = action.payload;
-        state.loading = false;
+        state.error = null;
       })
       .addCase(addPaperAsync.fulfilled, (state, action) => {
-        state.allPapers.push(action.payload);
-        state.error = null;
         state.loading = false;
+        state.allPapers.papers.push(action.payload); // ✅ push into papers array
+      })
+      .addCase(addPaperAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       })
 
-      .addCase(fetchAllPapersAsync.pending, (state, action) => {
-        state.error = null;
+      // ✅ Fetch All Papers (Pagination)
+      .addCase(fetchAllPapersAsync.pending, (state) => {
         state.loading = true;
-      })
-      .addCase(fetchAllPapersAsync.rejected, (state, action) => {
-        state.error = action.payload;
-        state.loading = false;
+        state.error = null;
       })
       .addCase(fetchAllPapersAsync.fulfilled, (state, action) => {
-        state.allPapers = action.payload;
-        state.error = null;
         state.loading = false;
+        console.log("actioon ",action.payload)
+        state.allPapers = action.payload; 
+    
+      })
+      .addCase(fetchAllPapersAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       })
 
-      .addCase(fetchPaperByIdAsync.pending, (state, action) => {
-        state.error = null;
+      // ✅ Fetch One Paper
+      .addCase(fetchPaperByIdAsync.pending, (state) => {
         state.loading = true;
-      })
-      .addCase(fetchPaperByIdAsync.rejected, (state, action) => {
-        state.error = action.payload;
-        state.loading = false;
+        state.error = null;
       })
       .addCase(fetchPaperByIdAsync.fulfilled, (state, action) => {
-        state.onePaper = action.payload;
-        state.error = null;
         state.loading = false;
+        state.onePaper = action.payload;
+      })
+      .addCase(fetchPaperByIdAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
