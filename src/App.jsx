@@ -13,6 +13,7 @@ import PopupLayout from "./popup/PopupLayout";
 import Loader from './components/ui/Loader'
 
 
+
 //Auth Pages
 const LoginForm = lazy(()=>import('./pages/auth/LoginForm'));
 const SignupForm = lazy(()=>import ("./pages/auth/SignupForm"));
@@ -25,7 +26,7 @@ const StudentLayout = lazy(()=>import('./components/layouts/studentLayout/Studen
 //Pages
 const LandingPage = lazy(()=>import("./pages/LandingPage"))
 const PaperPageHeader = lazy(()=>import('./pages/PaperPageHeader'))
-const ProfilePage = lazy(()=>import("./pages/ProfilePage"))
+const StudentProfilePage = lazy(()=>import("./pages/StudentProfilePage"))
 
 // Sections(teacher & student)
 const AddQuestion = lazy(()=>import("./sections/teacher/AddQuestion"))
@@ -34,8 +35,7 @@ const Questions = lazy(()=>import("./sections/teacher/Questions"))
 const AddPaper = lazy(()=>import("./sections/teacher/AddPaper"))
 const ViewPaperPage =lazy(()=>import("./sections/teacher/ViewPaperPage"));
 const StudentTest = lazy(()=>import('./sections/paper/StudentTest'));
-
-
+const TeacherProfile = lazy(()=>import('./sections/teacher/TeacherProfile'));
 
 
 
@@ -64,19 +64,20 @@ function App() {
           <Route index element={<h1>pratik </h1>} />
           <Route path="papers" element={<PaperPageHeader/>}/>
           <Route path="papers/test/:id" element={<StudentTest/>} />
-        <Route path="profile" element={<ProfilePage/>}/>
+        <Route path="profile" element={<StudentProfilePage/>}/>
         </Route>
 
 
         <Route
           path="/teacher"
           element={ <TeacherProtected><TeacherLayout /> </TeacherProtected> } >
-          <Route index element={<h1>ram ram </h1>} />
+          <Route index element={<TeacherProfile/>} />
           <Route path="addQuestion" element={<AddQuestion />} />
           <Route path="papers" element={<Papers />} />
           <Route path="questions" element={<Questions />} />
           <Route path="addPaper" element={<AddPaper />} />
           <Route path="papers/viewPaper/:id" element={<ViewPaperPage />} />
+         
         </Route>
       </Routes>
 

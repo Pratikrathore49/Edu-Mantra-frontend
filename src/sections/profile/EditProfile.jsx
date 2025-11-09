@@ -1,11 +1,16 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { updateStudentDetailsAsync } from "../../redux/user/userSlice";
+import {
+  updateStudentDetailsAsync,
+  updateTeacherDetailsAsync,
+} from "../../redux/user/userSlice";
 import { setSelectedModel } from "../../redux/model/modelSlice";
+import { updateTeacherDetailsApi } from "../../redux/apis/userApi";
 
 const EditProfile = ({ data, setIsEditOpen }) => {
-  const [isTeacher, setIsTeacher] = useState(false);
+  const [isTeacher, setIsTeacher] = useState( data?.role === 'teacher');
+ 
   const {
     register,
     handleSubmit,
@@ -20,15 +25,30 @@ const EditProfile = ({ data, setIsEditOpen }) => {
     },
   });
   const dispatch = useDispatch();
-  console.log("data", data.date_of_birth.split("T"));
+
   async function updateUser(data) {
     try {
-     await dispatch(updateStudentDetailsAsync(data)).unwrap()
-       dispatch(setSelectedModel({type:'success',message:'Student updated successfully'}))
-       setIsEditOpen(false)
-       reset()
+      if (isTeacher) {
+        await dispatch(updateTeacherDetailsAsync(data)).unwrap();
+      } else {
+        await dispatch(updateStudentDetailsAsync(data)).unwrap();
+      }
+      dispatch(
+        setSelectedModel({
+          type: "success",
+          message: "User updated successfully",
+        })
+      );
+      setIsEditOpen(false);
+      setIsTeacher(true)
+      reset();
     } catch (error) {
-       dispatch(setSelectedModel({type:'failure',message:'Student updatation failed '}))
+      dispatch(
+        setSelectedModel({
+          type: "failure",
+          message: "User updatation failed ",
+        })
+      );
       console.log(error);
     }
   }
@@ -151,30 +171,85 @@ const EditProfile = ({ data, setIsEditOpen }) => {
           </div>
         </div>
 
-        {/* Teacher / Student Specific */}
-        {isTeacher ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label
               className="text-sm font-medium text-gray-700"
-              htmlFor="teacher_id"
+              htmlFor="date_of_birth"
             >
-              Teacher ID
+              Date of Birth
             </label>
             <input
-              {...register("teacher_id", {
-                required: "Teacher ID is required",
+              {...register("date_of_birth", {
+                required: "Date of birth is required",
               })}
-              id="teacher_id"
+              id="date_of_birth"
               className="w-full mt-1 p-2 border border-purple-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-              type="text"
-              placeholder="Enter Teacher ID"
+              type="date"
             />
-            {errors.teacher_id && (
+            {errors.date_of_birth && (
               <p className="text-red-500 text-sm mt-1">
-                {errors.teacher_id.message}
+                {errors.date_of_birth.message}
               </p>
             )}
           </div>
+          <div>
+            <label
+              className="text-sm font-medium text-gray-700"
+              htmlFor="gender"
+            >
+              Gender
+            </label>
+            <select
+              {...register("gender")}
+              id="gender"
+              className="w-full mt-1 p-2 border border-purple-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+            >
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="others">others</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Teacher / Student Specific */}
+        {isTeacher ? (
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              
+            <div>
+              <label
+                className="text-sm font-medium text-gray-700"
+                htmlFor="years_of_experience"
+              >
+                Years of Experience
+              </label>
+              <input
+                {...register("years_of_experience")}
+                id="years_of_experience"
+                className="w-full mt-1 p-2 border border-purple-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                type="text"
+                placeholder="Experience In Number"
+              />
+            </div>
+              <div>
+                <label
+                  className="text-sm font-medium text-gray-700"
+                  htmlFor="department"
+                >
+                  department
+                </label>
+                <input
+                  {...register("department")}
+                  id="department"
+                  className="w-full mt-1 p-2 border border-purple-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  type="text"
+                  placeholder="Enter student ID"
+                />
+              </div>
+            </div>
+
+          </>
         ) : (
           <>
             {/* Academic Info */}
@@ -252,47 +327,6 @@ const EditProfile = ({ data, setIsEditOpen }) => {
                   type="text"
                   placeholder="Enter student ID"
                 />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label
-                  className="text-sm font-medium text-gray-700"
-                  htmlFor="date_of_birth"
-                >
-                  Date of Birth
-                </label>
-                <input
-                  {...register("date_of_birth", {
-                    required: "Date of birth is required",
-                  })}
-                  id="date_of_birth"
-                  className="w-full mt-1 p-2 border border-purple-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-                  type="date"
-                />
-                {errors.date_of_birth && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.date_of_birth.message}
-                  </p>
-                )}
-              </div>
-              <div>
-                <label
-                  className="text-sm font-medium text-gray-700"
-                  htmlFor="gender"
-                >
-                  Gender
-                </label>
-                <select
-                  {...register("gender")}
-                  id="gender"
-                  className="w-full mt-1 p-2 border border-purple-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-                >
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="others">others</option>
-                </select>
               </div>
             </div>
           </>

@@ -3,6 +3,7 @@ import {
   getStudentDetailsApi,
   getTeacherDetailsApi,
   updateStudentDetailsApi,
+  updateTeacherDetailsApi,
 } from "../apis/userApi";
 
 const initialState = {
@@ -40,6 +41,20 @@ export const updateStudentDetailsAsync = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const res = await updateStudentDetailsApi(data);
+      return res.data;
+    } catch (error) {
+      console.log("error thunk",error)
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+
+export const updateTeacherDetailsAsync = createAsyncThunk(
+  "user/updateTeacherProfile",
+  async (data, { rejectWithValue }) => {
+    try {
+      const res = await updateTeacherDetailsApi(data);
       return res.data;
     } catch (error) {
       console.log("error thunk",error)
@@ -93,7 +108,24 @@ export const userSlice = createSlice({
       .addCase(updateStudentDetailsAsync.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+
+
+
+    .addCase(updateTeacherDetailsAsync.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateTeacherDetailsAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+      })
+      .addCase(updateTeacherDetailsAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
+
+
   },
 });
 

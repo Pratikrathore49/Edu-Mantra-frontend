@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllPapersAsync } from "../../redux/paper/paperSlice";
-import { BookOpen, Clock, FileText, Award, ChevronLeft, ChevronRight } from "lucide-react";
+import { deletePapersAsync, fetchAllPapersAsync, updatePaperAsync } from "../../redux/paper/paperSlice";
+import {BookOpen,Clock,FileText,Award,ChevronLeft,ChevronRight,} from "lucide-react";
 import { Link } from "react-router";
-import PaperViewStructure from "./PaperViewStructure";
+import UpdatePaper from "./updatePaper";
 
 const Papers = () => {
   const dispatch = useDispatch();
-
+  const [isUpdatePaper,setIsUpdatePaper] = useState(false)
   const [page, setPage] = useState(0);
   const limit = 10;
 
@@ -26,9 +26,12 @@ const Papers = () => {
         Loading papers...
       </div>
     );
+   function updateCencelFun(){
+      setIsUpdatePaper({isopen:false,data:null})
+    }
 
   return (
-    <>
+    <>  { isUpdatePaper.isopen && <UpdatePaper paper={isUpdatePaper.data} updateCencelFun={updateCencelFun}/>}
       <section className="min-h-screen flex">
         <div className="flex-1 p-8">
           {/* Header + Pagination */}
@@ -79,8 +82,10 @@ const Papers = () => {
                 className="bg-white rounded-2xl shadow-md border border-purple-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col"
               >
                 {/* Header */}
-                <div className="bg-purple-500 text-white text-center py-3">
-                  <h2 className="text-lg font-semibold truncate">{paper.name}</h2>
+                <div className="border-b-1 text-center py-3">
+                  <h2 className="text-lg font-semibold truncate capitalize">
+                    {paper.name}
+                  </h2>
                 </div>
 
                 {/* Body */}
@@ -88,7 +93,8 @@ const Papers = () => {
                   <div className="flex items-center gap-2">
                     <BookOpen className="w-4 h-4 text-purple-600" />
                     <p>
-                      <span className="font-medium">Subject:</span> {paper.subject}
+                      <span className="font-medium">Subject:</span>{" "}
+                      {paper.subject}
                     </p>
                   </div>
 
@@ -122,12 +128,20 @@ const Papers = () => {
                 </div>
 
                 {/* Footer */}
-                <div className="p-4 bg-purple-50 flex justify-center">
+                <div className="p-4 bg-purple-50 flex justify-center gap-4">
                   <Link to={`viewPaper/${paper._id}`}>
-                    <button className="px-4 py-2 text-sm font-medium bg-purple-600 text-white rounded-lg w-full hover:bg-purple-700 transition-all cursor-pointer">
-                      View Paper
+                    <button className="px-4 py-2 text-sm font-medium bg-purple-500 text-white rounded-lg  hover:bg-purple-700 transition-all cursor-pointer">
+                      View
                     </button>
                   </Link>
+
+                  <button onClick={()=>setIsUpdatePaper({isopen:true,data:paper})} className="px-4 py-2 text-sm font-medium bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all cursor-pointer">
+                    update
+                  </button>
+
+                  <button onClick={()=>(dispatch(deletePapersAsync(paper._id)))} className="px-4 py-2 text-sm font-medium bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all cursor-pointer">
+                    delete
+                  </button>
                 </div>
               </div>
             ))}

@@ -31,6 +31,35 @@ const fetchPaperByIdApi = async (id) => {
   }
 };
 
+const updatePaperApi = async (data) => {
+  try {
+    const res = await axiosInstance.patch(`v3/paper/update/${data._id}`,data);
+    return res.data;
+  } catch (error) {
+    throw {
+      message:
+        error.response?.data?.message ||
+        error.message ||
+        "Paper Updatation Failed",
+      status: error.response?.status || 500,
+    };
+  }
+};
+const deletePapersApi = async (id) => {
+  try {
+    const res = await axiosInstance.delete(`v3/paper/delete/${id}`);
+    return res.data;
+  } catch (error) {
+    throw {
+      message:
+        error.response?.data?.message ||
+        error.message ||
+        "Deleting Paper Failed",
+      status: error.response?.status || 500,
+    };
+  }
+};
+
 const fetchAllPapersApi = async ({ skip, limit }) => {
   try {
     const res = await axiosInstance.get(
@@ -49,4 +78,4 @@ const fetchAllPapersApi = async ({ skip, limit }) => {
   }
 };
 
-export { addPaperApi, fetchAllPapersApi, fetchPaperByIdApi };
+export { addPaperApi, fetchAllPapersApi, fetchPaperByIdApi , deletePapersApi ,updatePaperApi };

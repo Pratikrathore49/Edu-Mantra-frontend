@@ -84,13 +84,11 @@ const Header = () => {
 
       {user ? (
      <Link to={'profile'}> <div  className="flex items-center text-2xl text-purple-800  gap-2">
-          {/* <span onClick={logoutFun} className="cursor-pointer">
-            <MdLogout />
-            {/* <IoSettingsOutline />//for setting }
-          </span> */}
+         
           <div className="w-9 h-9 flex justify-center items-center border-purple-800 border-2 rounded-full bg-purple-800  cursor-pointer font-semibold capitalize text-white">
             <p className="text-2xl px-1 pt-1 ">
               {user?.first_name?.slice(0, 1)}
+            
             </p>
           </div>
         </div></Link>  

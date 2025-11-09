@@ -2,11 +2,11 @@ import axiosInstance from "../../services/axiosInstance";
 
 export const getTeacherDetailsApi= async () => {
   try {
-    const response = await axiosInstance.get('v2/teache/');
+    const response = await axiosInstance.get('v3/teacher/details');
     return response.data;
   } catch (error) {
     throw {
-      message: error.response?.data?.message || error.message || "Error In Fetching Student Details",
+      message: error.response?.data?.message || error.message || "Error In Fetching Teacher Details",
       status: error.response?.status || 500,
     };
   }
@@ -31,6 +31,19 @@ export const getStudentDetailsApi = async () => {
 export const updateStudentDetailsApi = async(data) => {
   try {
     const response = await axiosInstance.patch('v2/student/update',data);
+    console.log("res api",response.data)
+    return response.data;
+  } catch (error) {
+    throw {
+      message: error.response?.data?.message || error.message || "Student Updatation Failed",
+      status: error.response?.status || 500,
+    };
+  }
+};
+
+export const updateTeacherDetailsApi = async(data) => {
+  try {
+    const response = await axiosInstance.patch('v3/teacher/update',data);
     console.log("res api",response.data)
     return response.data;
   } catch (error) {

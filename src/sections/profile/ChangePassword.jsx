@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Eye, EyeOff } from "lucide-react";
 import axiosInstance from "../../services/axiosInstance";
+import { useNavigate } from "react-router";
 
-const ChangePassword = () => {
+const ChangePassword = ({ role }) => {
   const [showOld, setShowOld] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
@@ -14,18 +15,22 @@ const ChangePassword = () => {
     watch,
     formState: { errors, isSubmitting },
   } = useForm();
-
+   const navigate = useNavigate()
   const onSubmit = async (data) => {
     try {
-        const res = await axiosInstance.patch("v2/student/change-pass",data)
-        console.log('frontendres',res)
-        console.log('runnning')
+      let res;
+      if (role) {
+        res = await axiosInstance.patch("v3/teacher/change-pass", data);
+      } else {
+        res = await axiosInstance.patch("v2/student/change-pass", data);
+      }
       if (!res.data.statusCode) {
         alert("Password change failed ❌");
         return;
       }
 
       alert("Password Updated Successfully ✅");
+      navigate('/');
       reset();
     } catch (error) {
       alert("Something went wrong");
