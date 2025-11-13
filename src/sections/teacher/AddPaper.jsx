@@ -151,12 +151,21 @@ const AddPaper = () => {
                 <label className="block mb-2 font-semibold text-gray-700">
                   Subject <span className="text-red-500">*</span>
                 </label>
-                <input
+                <input id='sub'
                   type="text"
                   {...register("subject", { required: "Subject is required" })}
                   placeholder="e.g. Machine Learning"
                   className="w-full border-gray-300 border focus:border-purple-500 focus:ring-2 focus:ring-purple-400 rounded-lg p-2.5 outline-none transition"
                 />
+                <datalist id='sub'>
+                  <option value="Theory of computation"/>
+                   <option value="Computer Network"/>
+                   <option value='General Knowledge'/>
+                   <option value='Deep Learning'/>
+                   <option value='English'/>
+                   <option value='Hindi'/>
+                   <option value='cyber Security'/>
+                </datalist>
                 {errors.subject && (
                   <p className="text-red-500 text-sm">
                     {errors.subject.message}

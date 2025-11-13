@@ -33,7 +33,7 @@ const fetchPaperByIdApi = async (id) => {
 
 const updatePaperApi = async (data) => {
   try {
-    const res = await axiosInstance.patch(`v3/paper/update/${data._id}`,data);
+    const res = await axiosInstance.patch(`v3/paper/update/${data._id}`, data);
     return res.data;
   } catch (error) {
     throw {
@@ -60,22 +60,30 @@ const deletePapersApi = async (id) => {
   }
 };
 
-const fetchAllPapersApi = async ({ skip, limit }) => {
+const fetchAllPapersApi = async ({ skip, limit, decodedSubject }) => {
   try {
-    const res = await axiosInstance.get(
-      `/v2/paper?skip=${skip}&limit=${limit}`
-    );
-   
+    console.log("api", decodedSubject);
+    let url = `/v2/paper?skip=${skip}&limit=${limit}`;
+    if (decodedSubject) url += `&subject=${encodeURIComponent(decodedSubject)}`; // only add if present
+
+    const res = await axiosInstance.get(url);
+    console.log("api2", res.data);
     return res.data;
   } catch (error) {
     throw {
       message:
         error.response?.data?.message ||
         error.message ||
-        "Papers Fetching Failed ",
+        "Papers Fetching Failed",
       status: error.response?.status || 500,
     };
   }
 };
 
-export { addPaperApi, fetchAllPapersApi, fetchPaperByIdApi , deletePapersApi ,updatePaperApi };
+export {
+  addPaperApi,
+  fetchAllPapersApi,
+  fetchPaperByIdApi,
+  deletePapersApi,
+  updatePaperApi,
+};

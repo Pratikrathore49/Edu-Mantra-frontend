@@ -18,7 +18,7 @@ const Header = () => {
     {
       name: "Papers",
       icon: <ChevronDown size={16} strokeWidth={2.6} />,
-      path: "/student/papers",
+      path: "/student/allSubPaper",
     },
     {
       name: "Courses Us",
@@ -39,7 +39,7 @@ const Header = () => {
 
   function logoutFun() {
     try {
-      const ok = confirm("Do you Really Want to Logout"); // when you free or before production , do it by custom model popup
+      const ok = confirm("Do you Really Want to Logout"); popup
       if (ok) {
         dispatch(logoutUserAsync());
         setSelectedModel({

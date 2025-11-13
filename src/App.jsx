@@ -14,6 +14,8 @@ import Loader from './components/ui/Loader'
 
 
 
+
+
 //Auth Pages
 const LoginForm = lazy(()=>import('./pages/auth/LoginForm'));
 const SignupForm = lazy(()=>import ("./pages/auth/SignupForm"));
@@ -25,8 +27,10 @@ const StudentLayout = lazy(()=>import('./components/layouts/studentLayout/Studen
 
 //Pages
 const LandingPage = lazy(()=>import("./pages/LandingPage"))
-const PaperPageHeader = lazy(()=>import('./pages/PaperPageHeader'))
+const StuAllPaper = lazy(()=>import("./sections/paper/StuAllPaper"))
+
 const StudentProfilePage = lazy(()=>import("./pages/StudentProfilePage"))
+const PaymentPage = lazy(()=>import('./pages/PaymentPage'))
 
 // Sections(teacher & student)
 const AddQuestion = lazy(()=>import("./sections/teacher/AddQuestion"))
@@ -36,6 +40,8 @@ const AddPaper = lazy(()=>import("./sections/teacher/AddPaper"))
 const ViewPaperPage =lazy(()=>import("./sections/teacher/ViewPaperPage"));
 const StudentTest = lazy(()=>import('./sections/paper/StudentTest'));
 const TeacherProfile = lazy(()=>import('./sections/teacher/TeacherProfile'));
+
+const AllSubjectsPaper = lazy(()=>import('./sections/paper/AllSubjectsPaper'))
 
 
 
@@ -62,9 +68,13 @@ function App() {
         <Route
           path="/student" element={<LoginProtected > <StudentLayout /></LoginProtected>}>
           <Route index element={<h1>pratik </h1>} />
-          <Route path="papers" element={<PaperPageHeader/>}/>
+        
+       
           <Route path="papers/test/:id" element={<StudentTest/>} />
         <Route path="profile" element={<StudentProfilePage/>}/>
+        <Route path="payment" element={<PaymentPage/>}/>
+         <Route path="allSubPaper" element={<AllSubjectsPaper/>}/> 
+          <Route path="allSubPaper/papers/:subject" element={<StuAllPaper/>}/>
         </Route>
 
 

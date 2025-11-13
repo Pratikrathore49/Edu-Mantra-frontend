@@ -52,9 +52,9 @@ export const deletePapersAsync = createAsyncThunk(
 
 export const fetchAllPapersAsync = createAsyncThunk(
   "paper/fetchAllPapers",
-  async ({ skip, limit }, thunkApi) => {
+  async ({ skip, limit ,decodedSubject}, thunkApi) => {
     try {
-      const res = await fetchAllPapersApi({ skip, limit });
+      const res = await fetchAllPapersApi({ skip, limit,decodedSubject });
       console.log("slice", res.data);
       return res.data; // ✅ should return { papers: [], totalPages }
     } catch (error) {
