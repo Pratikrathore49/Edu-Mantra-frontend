@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { registerStudent, registerTeacher } from "../../redux/auth/authSlice";
 import { setSelectedModel } from "../../redux/model/modelSlice";
-import Loader from "../../components/ui/Loader";
+import Loader from "../../components/Ui/Loader";
 import { useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 
