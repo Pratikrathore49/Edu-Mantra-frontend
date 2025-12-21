@@ -1,15 +1,15 @@
-
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axiosInstance from "../services/axiosInstance";
 import { useNavigate } from "react-router";
 
 const PaymentPage = () => {
-  const [amount, setAmount] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const fixedAmount = 299; // Fixed amount
+
   const handlePayment = async () => {
     const { data } = await axiosInstance.post(
       "v2/payment/create-order",
-      { amount }
+      { amount: fixedAmount }
     );
 
     const options = {
@@ -24,11 +24,13 @@ const PaymentPage = () => {
           "v2/payment/verify-payment",
           response
         );
-        alert(
-          verify.data.status === "success"
-            ? "Payment Success ✅"
-            : "Payment Failed ❌"
-        );
+
+        if (verify.data.status === "success") {
+          alert("✅ Payment Successful!");
+          navigate("/student/allSubPaper");
+        } else {
+          alert("❌ Payment Failed.Please try again.");
+        }
       },
     };
 
@@ -36,21 +38,20 @@ const PaymentPage = () => {
     rzp.open();
   };
 
-  useEffect(()=>{
-   async function temp(){
-    try{
-      const res = await axiosInstance.get('/v2/paper/isPurchase')   
-      if(res.data.access === true){
-        navigate('/student/papers')
-      } 
-      console.log('api response',res + 'res'+res.data.access)
-    }catch(error){
-       console.log(error.message)
+  useEffect(() => {
+    async function temp() {
+      try {
+        const res = await axiosInstance.get("/v2/paper/isPurchase");
+        if (res.data.access === true) {
+          navigate("/student/allSubPaper");
+        }
+        console.log("api response", res + "res" + res.data.access);
+      } catch (error) {
+        console.log(error.message);
+      }
     }
-}
-temp()
-  },[])
-
+    temp();
+  }, [navigate]);
 
   return (
     <div className="flex justify-center px-6 mt-10">
@@ -58,7 +59,7 @@ temp()
 
         {/* Title */}
         <h1 className="text-3xl font-extrabold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent text-center">
-          Premium Test Paper
+          Important Test Papers
         </h1>
 
         <p className="text-gray-600 text-center mt-2 text-sm">
@@ -78,23 +79,12 @@ temp()
           </div>
         </div>
 
-        {/* Amount Input */}
-        <div className="mt-6">
-          <input
-            type="number"
-            placeholder="Enter amount ₹"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-300 transition"
-          />
-        </div>
-
         {/* Button */}
         <button
           onClick={handlePayment}
           className="w-full mt-5 py-3 rounded-xl text-white font-semibold text-lg shadow-md bg-gradient-to-r from-indigo-600 to-purple-600 hover:opacity-90 transition"
         >
-          Buy Now
+          Buy Now ₹299
         </button>
 
       </div>

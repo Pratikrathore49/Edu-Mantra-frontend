@@ -11,9 +11,9 @@ const AllSubjectsPaper = () => {
   useEffect(() => {
     dispatch(fetchAllPapersAsync({ skip: 0, limit: 50 }));
   }, [dispatch]);
-
-  // ✅ Get unique subjects
-  const uniqueSubjects = [...new Set(papers.map((p) => p.subject))];
+   
+  
+  const uniqueSubjects = [...new Set(papers.map((p) => p.subject.toLowerCase()))];
 
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-6">
@@ -26,20 +26,20 @@ const AllSubjectsPaper = () => {
       ) : uniqueSubjects.length === 0 ? (
         <p className="text-center text-lg text-gray-500">No subjects found.</p>
       ) : (
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto "  >
           {uniqueSubjects.map((subject, index) => (
             <div
               key={index}
-              className="bg-white shadow-lg rounded-2xl p-6 border border-gray-200 hover:shadow-2xl transition duration-300"
+              className="bg-white shadow-lg rounded-2xl p-6 border border-gray-200 hover:shadow-2xl transition duration-300 flex flex-col items-center"
             >
-              <h2 className="text-xl font-semibold mb-3 text-gray-800">
+              <h2 className="text-xl capitalize font-semibold mb-3 text-gray-800">
                 {subject}
               </h2>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-600 mb-6 text-center">
                 Explore all test papers related to <span className="font-medium">{subject}</span>.
               </p>                   
              <Link to={`papers/${encodeURIComponent(subject)}`}> <button
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition cursor-pointer"
                 
               >
                 View Test Papers

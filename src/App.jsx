@@ -11,9 +11,7 @@ import { checkUserAsync } from './redux/auth/authSlice';
 
 import PopupLayout from "./popup/PopupLayout";
 import Loader from './components/ui/Loader'
-
-
-
+import PaymentProtected from "./protected/PaymentProtected";
 
 
 //Auth Pages
@@ -27,7 +25,7 @@ const StudentLayout = lazy(()=>import('./components/layouts/studentLayout/Studen
 
 //Pages
 const LandingPage = lazy(()=>import("./pages/LandingPage"))
-const StuAllPaper = lazy(()=>import("./sections/paper/StuAllPaper"))
+const StuOneSubAllPaper = lazy(()=>import("./sections/paper/StuOneSubAllPaper"))
 
 const StudentProfilePage = lazy(()=>import("./pages/StudentProfilePage"))
 const PaymentPage = lazy(()=>import('./pages/PaymentPage'))
@@ -69,12 +67,13 @@ function App() {
           path="/student" element={<LoginProtected > <StudentLayout /></LoginProtected>}>
           <Route index element={<h1>pratik </h1>} />
         
-       
-          <Route path="papers/test/:id" element={<StudentTest/>} />
         <Route path="profile" element={<StudentProfilePage/>}/>
         <Route path="payment" element={<PaymentPage/>}/>
-         <Route path="allSubPaper" element={<AllSubjectsPaper/>}/> 
-          <Route path="allSubPaper/papers/:subject" element={<StuAllPaper/>}/>
+      
+        <Route path="test/:id" element={ <PaymentProtected><StudentTest/></PaymentProtected>} />
+         <Route path="allSubPaper" element={ <PaymentProtected><AllSubjectsPaper/></PaymentProtected>}/> 
+          <Route path="allSubPaper/papers/:subject" element={ <PaymentProtected><StuOneSubAllPaper/></PaymentProtected>}/>
+          
         </Route>
 
 

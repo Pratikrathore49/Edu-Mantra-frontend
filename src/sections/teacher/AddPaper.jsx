@@ -151,7 +151,7 @@ const AddPaper = () => {
                 <label className="block mb-2 font-semibold text-gray-700">
                   Subject <span className="text-red-500">*</span>
                 </label>
-                <input id='sub'
+                <input list="sub"
                   type="text"
                   {...register("subject", { required: "Subject is required" })}
                   placeholder="e.g. Machine Learning"
