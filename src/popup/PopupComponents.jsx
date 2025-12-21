@@ -1,78 +1,13 @@
-// import { useEffect } from "react";
-// import {  useDispatch } from "react-redux";
-// import { handleCloseModlePopup } from "../redux/model/modelSlice.js";
-  
 
-
-// export const SuccessPopup = ({ message }) => {
-//   const dispatch = useDispatch();
-
-//   useEffect(() => {
-//     const timer = setTimeout(() => {
-//       dispatch(handleCloseModlePopup());
-//     }, 2000);
-//     return () => clearTimeout(timer);
-//   }, [dispatch]);
-
-//   return (
-//     <div
-//       onClick={(e) => e.stopPropagation()}
-//       className="min-w-[300px] min-h-[200px] flex px-6 flex-col justify-center items-center 
-//                  rounded-2xl shadow-xl border border-green-500 bg-green-100"
-//     >
-//       <h2 className="text-2xl font-bold mb-3 text-green-700">{message}</h2>
-
-//       <button
-//         onClick={() => dispatch(handleCloseModlePopup())}
-//         className="px-4 py-2 rounded-lg font-medium text-white bg-green-600 
-//                    hover:bg-green-700 hover:scale-95"
-//       >
-//         Close
-//       </button>
-//     </div>
-//   );
-// };
-
-
-
-// export const FailurePopup = ({ message }) => {
-//   const dispatch = useDispatch();
-
-//   useEffect(() => {
-//     const timer = setTimeout(() => {
-//       dispatch(handleCloseModlePopup());
-//     }, 2000);
-//     return () => clearTimeout(timer);
-//   }, [dispatch]);
-
-//   return (
-//     <div
-//       onClick={(e) => e.stopPropagation()}
-//       className="min-w-[300px] min-h-[200px] flex px-6 flex-col justify-center items-center 
-//                  rounded-2xl shadow-xl border border-red-500 bg-red-100"
-//     >
-//       <h2 className="text-2xl font-bold mb-3 text-red-700">{message}</h2>
-
-//       <button
-//         onClick={() => dispatch(handleCloseModlePopup())}
-//         className="px-4 py-2 rounded-lg font-medium text-white bg-red-600 
-//                    hover:bg-red-700 hover:scale-95"
-//       >
-//         Close
-//       </button>
-//     </div>
-//   );
-// };
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { handleCloseModlePopup } from "../redux/model/modelSlice.js";
 import { logoutUserAsync } from "../redux/auth/authSlice.js";
 
-// ✅ Shared popup base style
 const popupBase =
   "min-w-[320px] min-h-[200px] flex flex-col justify-center items-center px-6 py-6 rounded-3xl shadow-2xl backdrop-blur-md bg-opacity-90 transform transition-all duration-300 scale-100 hover:scale-[1.02]";
 
-// ✅ Success Popup
+
 export const SuccessPopup = ({ message }) => {
   const dispatch = useDispatch();
 
@@ -115,7 +50,7 @@ export const SuccessPopup = ({ message }) => {
   );
 };
 
-// ✅ Failure Popup
+
 export const FailurePopup = ({ message }) => {
   const dispatch = useDispatch();
 
@@ -187,7 +122,7 @@ export const ConfirmPopup = ({ message}) => {
                  bg-yellow-50 backdrop-blur-md bg-opacity-90 transition-all 
                  duration-300 transform hover:scale-[1.02]"
     >
-      {/* ⚠️ Icon */}
+     
       <div className="w-14 h-14 rounded-full flex items-center justify-center bg-yellow-100 border-2 border-yellow-500 mb-3">
         <svg
           xmlns="http://www.w3.org/2000/svg"
