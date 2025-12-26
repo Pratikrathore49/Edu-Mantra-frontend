@@ -12,7 +12,7 @@ import { checkUserAsync } from './redux/auth/authSlice';
 import PopupLayout from "./popup/PopupLayout";
 
 import PaymentProtected from "./protected/PaymentProtected";
-import Loader from "./components/ui/Loader";
+import Loader from "./Components/ui/Loader";
 
 
 //Auth Pages
@@ -20,9 +20,9 @@ const LoginForm = lazy(()=>import('./pages/auth/LoginForm'));
 const SignupForm = lazy(()=>import ("./pages/auth/SignupForm"));
 
 //Layouts 
-const LandingLayout = lazy(()=>import('./components/layouts/LandingLayout/LandingLayout'))
-const TeacherLayout = lazy(()=>import('./components/layouts/teacherLayout/TeacherLayout'))
-const StudentLayout = lazy(()=>import('./components/layouts/studentLayout/StudentLayout'))
+const LandingLayout = lazy(()=>import('./Components/layouts/LandingLayout/LandingLayout'))
+const TeacherLayout = lazy(()=>import('./Components/layouts/teacherLayout/TeacherLayout'))
+const StudentLayout = lazy(()=>import('./Components/layouts/studentLayout/StudentLayout'))
 
 //Pages
 const LandingPage = lazy(()=>import("./pages/LandingPage"))
