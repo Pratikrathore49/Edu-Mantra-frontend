@@ -12,7 +12,7 @@ import { checkUserAsync } from './redux/auth/authSlice';
 import PopupLayout from "./popup/PopupLayout";
 
 import PaymentProtected from "./protected/PaymentProtected";
-import Loader from "./components/ui/Loader";
+// import Loader from "./components/ui/Loader";
 
 
 
@@ -55,9 +55,9 @@ function App() {
 
   return (
     <>
-    <Suspense fallback={<Loader/>}>
+    <Suspense fallback={<h1 className="animate-ping text-center">loading...</h1>}>
       <Routes>
-        <Route path="/loader" element={<Loader />} />
+        {/* <Route path="/loader" element={<Loader />} /> */}
         <Route path="/login" element={<LoginForm />} />
         <Route path="/signup" element={<SignupForm />} />
         <Route path="/" element={<LandingLayout />}>
