@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deletePapersAsync, fetchAllPapersAsync, updatePaperAsync } from "../../redux/paper/paperSlice";
 import {BookOpen,Clock,FileText,Award,ChevronLeft,ChevronRight,} from "lucide-react";
 import { Link } from "react-router";
-import UpdatePaper from "./updatePaper";
+import UpdatePaper from "./UpdatePaper";
 
 const Papers = () => {
   const dispatch = useDispatch();
