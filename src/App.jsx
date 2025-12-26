@@ -12,6 +12,7 @@ import { checkUserAsync } from './redux/auth/authSlice';
 import PopupLayout from "./popup/PopupLayout";
 
 import PaymentProtected from "./protected/PaymentProtected";
+import Loader from "./components/ui/Loader";
 
 
 //Auth Pages
