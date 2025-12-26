@@ -13,7 +13,7 @@ import {
   FaLinkedin,
   FaTwitter,
 } from "react-icons/fa";
-import Button from "../ui/Button";
+import Button from "../Ui/Button";
 
 const Footer = () => {
   return (
