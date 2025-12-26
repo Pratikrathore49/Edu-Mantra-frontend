@@ -1,6 +1,6 @@
 import React from 'react'
 import studyStu from '../../assets/images/studentTable.png'
-import Button from '../../components/Ui/Button'
+import Button from '../../Components/Ui/Button'
 
 const FeaturesSection = () => {
   return (

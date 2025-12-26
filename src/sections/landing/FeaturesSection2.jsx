@@ -1,4 +1,4 @@
-import Button from '../../components/Ui/Button'
+import Button from '../../Components/Ui/Button'
 
 const FeaturesSection2 = () => {
   return (
