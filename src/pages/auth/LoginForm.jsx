@@ -40,8 +40,7 @@ const LoginForm = () => {
         alert("Please complete the CAPTCHA");
         return;
       }
-      // formData.recaptcha = token;
-      formData.recaptchaToken = token;
+      formData.recaptcha = token;
       if (isTeacher) {
         const data = await dispatch(teacherLogin(formData)).unwrap();
         console.log(data);
