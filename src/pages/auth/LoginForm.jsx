@@ -10,6 +10,7 @@ import Loader from "../../Components/Ui/Loader.jsx";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRef } from "react";
 import { Link, useNavigate } from "react-router";
+import { captchaKeySite } from "../../services/constant.js";
 
 
 const LoginForm = () => {
@@ -177,7 +178,8 @@ const LoginForm = () => {
                <ReCAPTCHA
              
                className="mt-2 ml-2"
-              sitekey="6Le3pjcsAAAAACiFILYKoOJtb9msSv0eCkfyUsrK"
+
+           sitekey={captchaKeySite }
               ref={recaptchaRef}
               />
 

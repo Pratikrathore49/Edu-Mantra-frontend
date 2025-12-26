@@ -8,6 +8,7 @@ import { setSelectedModel } from "../../redux/model/modelSlice";
 import Loader from "../../Components/Ui/Loader.jsx";
 import { useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
+import { captchaKeySite } from "../../services/constant.js";
 
 const SignupForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -376,7 +377,7 @@ const SignupForm = () => {
 
             <ReCAPTCHA
               className="mt-2 ml-2"
-              sitekey="6Le3pjcsAAAAACiFILYKoOJtb9msSv0eCkfyUsrK"
+              sitekey={captchaKeySite}
               ref={recaptchaRef}
             />
 
