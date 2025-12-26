@@ -376,7 +376,7 @@ const SignupForm = () => {
 
             <ReCAPTCHA
               className="mt-2 ml-2"
-              sitekey="6LeXEeorAAAAAAQuurb4sM_y1Cjsr0Rf2I-IMGAr"
+              sitekey="6Le3pjcsAAAAACiFILYKoOJtb9msSv0eCkfyUsrK"
               ref={recaptchaRef}
             />
 
