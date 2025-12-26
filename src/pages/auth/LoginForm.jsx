@@ -36,12 +36,12 @@ const LoginForm = () => {
 
   const handleLogin = async (formData) => {
     try {
-      const token = recaptchaRef.current.getValue();
-      if (!token) {
-        alert("Please complete the CAPTCHA");
-        return;
-      }
-      formData.recaptcha = token;
+      // const token = recaptchaRef.current.getValue();
+      // if (!token) {
+      //   alert("Please complete the CAPTCHA");
+      //   return;
+      // }
+      // formData.recaptcha = token;
       if (isTeacher) {
         const data = await dispatch(teacherLogin(formData)).unwrap();
         console.log(data);
@@ -52,7 +52,7 @@ const LoginForm = () => {
       dispatch(
         setSelectedModel({ type: "success", message: "Login Successful" })
       );
-      recaptchaRef.current.reset();
+      // recaptchaRef.current.reset();
       reset();
        navigate('/student')
     
@@ -175,13 +175,13 @@ const LoginForm = () => {
               </div>
             </div>
 
-               <ReCAPTCHA
+               {/* <ReCAPTCHA
              
                className="mt-2 ml-2"
 
            sitekey={captchaKeySite }
               ref={recaptchaRef}
-              />
+              /> */}
 
             <button
               type="submit"

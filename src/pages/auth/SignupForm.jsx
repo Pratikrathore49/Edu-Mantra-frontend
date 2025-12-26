@@ -24,12 +24,12 @@ const SignupForm = () => {
   } = useForm();
 
   async function handleSignup(formData) {
-    const token = recaptchaRef.current.getValue();
-    if (!token) {
-      alert("Please complete the CAPTCHA");
-      return;
-    }
-    formData.recaptcha = token;
+    // const token = recaptchaRef.current.getValue();
+    // if (!token) {
+    //   alert("Please complete the CAPTCHA");
+    //   return;
+    // }
+    // formData.recaptcha = token;
     try {
       if (isTeacher) {
         const data = await dispatch(registerTeacher(formData)).unwrap();
@@ -375,11 +375,11 @@ const SignupForm = () => {
               ></textarea>
             </div>
 
-            <ReCAPTCHA
+            {/* <ReCAPTCHA
               className="mt-2 ml-2"
               sitekey={captchaKeySite}
               ref={recaptchaRef}
-            />
+            /> */}
 
             {/* Submit Button */}
             <button
