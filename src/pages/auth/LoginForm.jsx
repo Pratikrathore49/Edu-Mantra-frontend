@@ -177,7 +177,7 @@ const LoginForm = () => {
                <ReCAPTCHA
              
                className="mt-2 ml-2"
-              sitekey="6Le3pjcsAAAAACiFILYKoOJtb9msSv0eCkfyUsrK "
+              sitekey="6Le3pjcsAAAAACiFILYKoOJtb9msSv0eCkfyUsrK"
               ref={recaptchaRef}
               />
 
