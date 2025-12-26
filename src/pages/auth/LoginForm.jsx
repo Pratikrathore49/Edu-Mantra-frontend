@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Eye, EyeOff } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { setSelectedModel } from "../../redux/model/modelSlice";
-import Loader from "../../components/Ui/Loader.jsx";
+import Loader from "../../Components/Ui/Loader.jsx";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRef } from "react";
 import { Link, useNavigate } from "react-router";
